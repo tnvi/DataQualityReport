@@ -1,0 +1,10 @@
+notes.txt
+.venv/
+Daily notes/
+__pycache__/
+*.__pycache__
+.env
+data/raw/
+data/processed/
+.ipynb_checkpoints/
+*.log
