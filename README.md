@@ -4,8 +4,6 @@
 
 DataQuality is a portfolio data engineering project that builds a configurable data quality validation platform for e-commerce datasets.
 
-
-
 ## Project Goal
 
 
@@ -132,7 +130,7 @@ Activate on Windows:
 
 ```bash
 
-.venv\\Scripts\\activate
+.venv\Scripts\activate
 
 ```
 
@@ -156,3 +154,72 @@ pip install -r requirements.txt
 
 Day 1: Repository and environment setup.
 
+## Dataset Source
+
+This project uses the Olist Brazilian E-commerce Public Dataset from Kaggle.
+
+The dataset is used as a realistic e-commerce source system for building a data quality validation platform.
+
+https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce/data
+
+## Local Data Placement
+
+Download the dataset manually from Kaggle and place the selected CSV files under:
+
+```text
+data/raw/csv/
+```
+
+Raw data is intentionally not committed to Git.
+
+## V1 Dataset Scope
+
+For V1, this project uses the following Olist files:
+
+| File | Dataset Name | Purpose |
+|---|---|---|
+| `olist_orders_dataset.csv` | orders | Main order lifecycle table |
+| `olist_order_items_dataset.csv` | order_items | Order line items; connects orders, products, and sellers |
+| `olist_order_payments_dataset.csv` | payments | Payment details for orders |
+| `olist_customers_dataset.csv` | customers | Customer information |
+| `olist_products_dataset.csv` | products | Product information |
+| `olist_sellers_dataset.csv` | sellers | Seller information |
+
+## Tables Not Deeply Used in V1
+
+The following files may exist in the Kaggle dataset but are not deeply used in V1:
+
+| File | Reason |
+|---|---|
+| `olist_geolocation_dataset.csv` | Useful later, but can distract from core order-quality checks |
+| `olist_order_reviews_dataset.csv` | Useful later for review-quality or customer-experience analysis |
+| `product_category_name_translation.csv` | Useful later for product category enrichment |
+
+## Initial Table Relationships
+
+```text
+customers.customer_id
+  → orders.customer_id
+
+orders.order_id
+  → order_items.order_id
+  → payments.order_id
+
+products.product_id
+  → order_items.product_id
+
+sellers.seller_id
+  → order_items.seller_id
+```
+
+## Initial Data Quality Ideas
+
+Based on the selected V1 tables, the first rule categories will be:
+
+- Schema checks
+- Required column checks
+- Primary key uniqueness checks
+- Composite key uniqueness checks
+- Accepted value checks
+- Numeric range checks
+- Basic relationship checks
