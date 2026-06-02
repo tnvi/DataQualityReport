@@ -1,0 +1,32 @@
+dataset: customers
+source_file: olist_customers_dataset.csv
+description: details of customer who have ordered from us
+
+primary_key: customer_id
+
+columns:
+  customer_id:
+    required: true
+    unique: true
+    severity: CRITICAL
+    description: unique identifier for each customer to be mapped to order dataset
+
+  customer_unique_id:
+    required: true
+    severity: CRITICAL
+    description: unique identifier for each customer for each order
+
+  customer_zip_code_prefix:
+    required: true
+    severity: MEDIUM
+    description: first 5 numbers of purchase zip code 
+
+  customer_city:
+    required: true
+    severity: MEDIUM
+    description: city of customer
+
+  customer_state:
+    required: true
+    severity: MEDIUM
+    description: state of customer

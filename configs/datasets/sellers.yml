@@ -1,0 +1,27 @@
+dataset: sellers
+source_file: olist_sellers_dataset.csv
+description: details of sellers selling on the platform
+
+primary_key: seller_id
+
+columns:
+  seller_id:
+    required: true
+    unique: true
+    severity: CRITICAL
+    description: seller indetifier
+
+  seller_zip_code_prefix:
+    required: true
+    severity: MEDIUM
+    description: first 5 charachters of the zipcode
+
+  seller_city:
+    required: true
+    severity: MEDIUM
+    description: city of the seller
+  
+  seller_state:
+    required: true
+    severity: MEDIUM
+    description: state of the seller

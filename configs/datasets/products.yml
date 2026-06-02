@@ -1,0 +1,54 @@
+dataset: products
+source_file: olist_products_dataset.csv
+description: details of products
+
+primary_key: product_id
+
+columns:
+  product_id:
+    required: true
+    unique: true
+    severity: CRITICAL
+    description: indetifier for the products
+
+
+  product_category_name:
+    severity: LOW
+    description: name of the product
+
+  product_name_lenght:
+    severity: LOW
+    min: 0
+    description: length name of the product
+
+  
+  product_description_lenght:
+    severity: LOW
+    min: 0
+    description: length of description of the product
+
+  product_photos_qty:
+    severity: LOW
+    min: 0
+    description: product photos count
+
+  product_weight_g:
+    severity: MEDIUM
+    min: 0
+    description: weight of the product in grams
+
+  product_length_cm:
+    severity: MEDIUM
+    min: 0
+    description: lenght of the product in cm
+  
+  product_height_cm:
+    severity: MEDIUM
+    min: 0
+    description: height of the product in cm
+
+  product_width_cm:
+    severity: MEDIUM
+    min: 0
+    description: width of the product in cm
+

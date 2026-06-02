@@ -1,0 +1,69 @@
+dataset: order_items
+source_file: olist_order_items_dataset.csv
+description: have itme level details of all the orders received in the system
+
+composite_key: 
+  - order_id 
+  - order_item_id
+
+columns:
+  order_id:
+    required: true
+    severity: CRITICAL
+    description: identifier of the order this belongs to
+
+  order_item_id:
+    required: true
+    severity: CRITICAL
+    description: Line item number of the product in the order
+
+  product_id:
+    required: true
+    severity: CRITICAL
+    description: product identifier referring to the product order from product dataset
+
+  seller_id:
+    required: true
+    severity: HIGH
+    description: Seller details who is selling the product ordered
+
+  shipping_limit_date:
+    severity: MEDIUM
+    data_type: timestamp
+    description: latest expected shipping date from the seller
+
+  price:
+    required: true
+    min: 0
+    severity: HIGH
+    description: item price, should not be negative
+
+  freight_value: 
+    required: true
+    min: 0
+    severity: HIGH
+    description: shipping charges, should not be negative. If multiple products, shippings can be split amongst them. 
+
+relationships:
+  - column: order_id
+    references:
+      dataset: orders
+      column: order_id
+    severity: CRITICAL
+    description: every row should refernce an order in the orders dataset
+
+  - column: product_id
+    references:
+      dataset: products
+      column: product_id
+    severity: HIGH
+    description: refers to the products in product dataset
+
+  - column: seller_id
+    references:
+      dataset: sellers
+      column: seller_id
+    severity: HIGH
+    description: refers to the sellers in seller dataset
+  
+    

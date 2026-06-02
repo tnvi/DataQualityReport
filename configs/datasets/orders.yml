@@ -1,0 +1,79 @@
+dataset: orders
+source_file: olist_orders_dataset_plus_1000.csv
+description: Order life cycle table. Each row represents 1 order. 
+
+primary_key: order_id
+
+columns: 
+  order_id:
+    required: true
+    unique: true
+    severity: CRITICAL
+    description: unique identifier for each order
+
+  customer_id:
+    required: true
+    severity: HIGH
+    description: Customer identifier for each order, linked to customer dataset
+
+  order_status:
+    required: true
+    severity: HIGH
+    accepted_values:
+      - delivered
+      - shipped
+      - unavailable
+      - processing
+      - canceled
+      - invoiced
+      - approved
+      - created
+    description: life cycle status of the order
+  
+  order_purchase_timestamp:
+    required: true
+    severity: HIGH
+    not_future_date: true
+    data_type: timestamp
+    description: date and time on which order was placed
+
+  order_approved_at:
+    severity: MEDIUM
+    not_future_date: true
+    data_type: timestamp
+    description: timestamp when order was approved to be procesed further
+
+  order_delivered_carrier_date:
+    severity: MEDIUM
+    not_future_date: true
+    data_type: timestamp
+    description: timestamp when order was delivered to carrier
+
+  order_delivered_customer_date:
+    severity: HIGH
+    greater_than_equal_to: order_purchase_timestamp 
+    not_future_date: true
+    data_type: timestamp
+    nullable_when:
+      order_status:
+        - canceled
+        - unavailable
+    description: timestamp when order was delivered to the customer
+
+  order_estimated_delivery_date:
+    severity: MEDIUM
+    data_type: timestamp
+    nullable_when:
+      order_status:
+        - canceled
+        - unavailable
+    description: estimated delivery date for the order 
+
+relationships:
+  - column: customer_id
+    references: 
+      dataset: customers
+      column: customer_id
+    severity: HIGH
+    description: every order should refernce a valid customer
+    

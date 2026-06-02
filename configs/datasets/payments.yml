@@ -1,0 +1,51 @@
+dataset: payments
+source_file: olist_order_payments_datset.csv
+description: payment details of all the order received
+
+composite_key:
+  - order_id
+  - payment_sequential
+
+columns:
+  order_id:
+    required: true
+    severity: CRITICAL
+    description: identifier of the order that the payment belongs to
+
+  payment_sequential:
+    required: true
+    severity: CRITICAL
+    description: sequence number of the payment records within an order
+
+  payment_type:
+    required: true
+    severity: HIGH
+    accepted_values:
+      - boleto
+      - credit_card
+      - debit_card
+      - not defined
+      - voucher
+    description: payment method
+
+  payment_installments:
+    required: true
+    severity: MEDIUM
+    min: 0
+    description: number of payment installments
+      
+  payment_value:
+    required: true
+    severity: MEDIUM
+    min: 0
+    description: value of payment 
+
+relationships:
+  - column: order_id
+    references:
+      dataset: orders
+      column: order_id
+    severity: CRITICAL
+    description: all the payments should have order associated with them
+    
+      

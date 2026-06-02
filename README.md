@@ -223,3 +223,36 @@ Based on the selected V1 tables, the first rule categories will be:
 - Accepted value checks
 - Numeric range checks
 - Basic relationship checks
+
+## Validation Rule Configuration
+
+Validation rules are stored as YAML files under:
+
+```text
+configs/datasets/
+```
+
+Each dataset has its own rule file:
+
+| Dataset | Rule File |
+|---|---|
+| orders | `configs/datasets/orders.yml` |
+| order_items | `configs/datasets/order_items.yml` |
+| payments | `configs/datasets/payments.yml` |
+| customers | `configs/datasets/customers.yml` |
+| products | `configs/datasets/products.yml` |
+| sellers | `configs/datasets/sellers.yml` |
+
+The rules are intentionally stored outside Python code.
+
+This allows the same validation engine to load dataset-specific expectations from configuration instead of hardcoding checks separately for every dataset.
+
+Current rule categories defined in YAML:
+
+- Required column checks
+- Primary key uniqueness checks
+- Composite key uniqueness checks
+- Accepted value checks
+- Numeric minimum/range checks
+- Timestamp expectations
+- Basic relationship checks
