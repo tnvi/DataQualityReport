@@ -256,3 +256,50 @@ Current rule categories defined in YAML:
 - Numeric minimum/range checks
 - Timestamp expectations
 - Basic relationship checks
+
+## Current Engine Components
+
+The first reusable engine components have been added.
+
+### CSV Reader
+
+File:
+
+```text
+src/dataguard/ingestion/csv_reader.py
+```
+
+Purpose:
+
+* Reads CSV files into Pandas DataFrames
+* Checks that the file exists
+* Checks that the file has a `.csv` extension
+
+### Rule Loader
+
+File:
+
+```text
+src/dataguard/validation/rule_loader.py
+```
+
+Purpose:
+
+* Loads dataset-specific YAML rules from `configs/datasets/`
+* Uses the dataset name to find the matching YAML file
+* Validates that the YAML file is not empty
+* Validates that the dataset name inside the YAML matches the requested dataset
+
+### Running Tests
+
+Set `PYTHONPATH` so Python can find the `src/dataguard` package:
+
+```powershell
+$env:PYTHONPATH = "src"
+```
+
+Run Day 4 tests:
+
+```powershell
+python -m pytest tests\test_csv_reader.py tests\test_rule_loader.py -v
+```
