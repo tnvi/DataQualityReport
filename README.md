@@ -280,7 +280,7 @@ Purpose:
 File:
 
 ```text
-src/dataguard/validation/rule_loader.py
+src/dataquality/validation/rule_loader.py
 ```
 
 Purpose:
@@ -292,7 +292,7 @@ Purpose:
 
 ### Running Tests
 
-Set `PYTHONPATH` so Python can find the `src/dataguard` package:
+Set `PYTHONPATH` so Python can find the `src/dataquality` package:
 
 ```powershell
 $env:PYTHONPATH = "src"
@@ -303,3 +303,26 @@ Run Day 4 tests:
 ```powershell
 python -m pytest tests\test_csv_reader.py tests\test_rule_loader.py -v
 ```
+
+## Supported Validators 
+
+The first validator modules have been added under: 
+```text 
+src/dataquality/validation/ 
+``` 
+Current validators:
+ | Validator | File | Purpose |
+  |---|---|---| 
+  | Schema validator | `schema_validator.py` | Checks missing and unexpected columns | 
+  | Required validator | `required_validator.py` | Checks required columns for null values | 
+  | Duplicate validator | `duplicate_validator.py` | Checks primary key and composite key uniqueness | 
+  | Range validator | `range_validator.py` | Checks configured min/max numeric rules |
+  | Accepted values validator | `accepted_values_validator.py` | Checks categorical values against allowed lists | 
+  | Relationship validator | `relationship_validator.py` | Checks referential integrity across datasets | 
+  
+  All validators return standardized result dictionaries using: 
+  ```text 
+  src/dataquality/validation/result.py 
+  ``` 
+  
+  The result writer will be added next.

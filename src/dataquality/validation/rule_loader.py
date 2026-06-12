@@ -11,6 +11,7 @@ def load_rules(dataset_name: str, rules_dir: str | Path = DEFAULT_RULES_DIR) -> 
     if not rules_path.exists():
         raise FileNotFoundError(f"Rule config not found: {rules_path}")
     
+    #read the yml file into a dictionary
     with rules_path.open("r", encoding="utf-8") as file:
         rules = yaml.safe_load(file)
 
