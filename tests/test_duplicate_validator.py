@@ -207,7 +207,7 @@ def test_validate_duplicates_composite_key_severity_check():
                 'required': True,
                 'severity': 'HIGH'
             },
-            'customer_id':{
+            'order_item_id':{
                 'required': True
             }
         }    }

@@ -326,3 +326,51 @@ Current validators:
   ``` 
   
   The result writer will be added next.
+  
+  ## Profiling and Output Writing 
+  The local profiler and result writer have been added. 
+  
+  ### Pandas Profiler 
+  
+  File: 
+  ```text
+   src/dataquality/profiling/pandas_profiler.py 
+  ``` 
+  
+  The profiler generates dataset-level and column-level metrics. 
+  Current metrics: 
+  - row count 
+  - column count 
+  - duplicate key count 
+  - null count per column 
+  - null percentage per column 
+  - distinct count per column 
+  - data type per column 
+  - min/max values where safe 
+  
+  ### Result Writer 
+  File: 
+  ```text 
+  src/dataquality/storage/result_writer.py 
+  ``` 
+  
+  The writer persists records to CSV. 
+  Output locations:
+   ```text 
+   data/processed/profile_metrics/ 
+   data/processed/validation_results/ 
+   ``` 
+   Example output files: 
+   ```text 
+   data/processed/profile_metrics/orders_profile_metrics.csv 
+   data/processed/validation_results/orders_validation_results.csv 
+   ``` 
+   These generated outputs are not committed to Git. 
+   
+   ### Running Tests
+   ```powershell 
+   $env:PYTHONPATH = "src" 
+   python -m pytest tests -v 
+   ```
+
+   
