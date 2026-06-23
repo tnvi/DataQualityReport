@@ -23,8 +23,7 @@ The completed Week 1 engine can:
 - Run automated tests using pytest
 
 ## Local Pipeline
-
-text
+```text
 Olist CSV file
   ↓
 CSV reader
@@ -45,7 +44,7 @@ Validation engine
   ↓
 Profile metrics CSV
 Validation results CSV
-
+```
 
 ## Dataset
 
@@ -91,7 +90,7 @@ sellers.seller_id
 
 ## Project Structure
 
-text
+```text
 Dataquality/
   README.md
   requirements.txt
@@ -138,48 +137,48 @@ Dataquality/
 
   tests/
   tools/
-
+```
 
 ## Setup
 
 ### 1. Clone the repository
 
-powershell
+```powershell
 git clone https://github.com/<username>/Dataquality.git
 cd Dataquality
-
+```
 
 ### 2. Create a virtual environment
 
-powershell
+```powershell
 python -m venv .venv
-
+```
 
 ### 3. Activate it on Windows
 
-powershell
+```powershell
 .venv\Scripts\activate
-
+```
 
 ### 4. Install dependencies
 
-powershell
+```powershell
 pip install -r requirements.txt
-
+```
 
 ### 5. Set the Python source path
 
-powershell
+```powershell
 $env:PYTHONPATH = "src"
-
+```
 
 ### 6. Add the Olist files
 
 Place the selected CSV files under:
 
-text
+```text
 data/raw/olist/
-
+```
 
 Do not commit these files.
 
@@ -187,66 +186,66 @@ Do not commit these files.
 
 ### Show CLI help
 
-powershell
+```powershell
 python -m Dataquality.cli --help
-
+```
 
 ### Show validation command help
 
-powershell
+```powershell
 python -m Dataquality.cli validate --help
-
+```
 
 ### Validate a configured dataset
 
-powershell
+```powershell
 python -m Dataquality.cli validate --dataset orders
-
+```
 
 When --input is omitted, Dataquality uses the source_file value from:
 
-text
+```text
 configs/datasets/orders.yml
-
+```
 
 ### Validate an explicit input file
 
-powershell
+```powershell
 python -m Dataquality.cli validate `
   --dataset orders `
   --input data\raw\olist\olist_orders_dataset_plus_1000.csv
-
+```
 
 ### Validate other V1 datasets
 
-powershell
+```powershell
 python -m Dataquality.cli validate --dataset customers
 python -m Dataquality.cli validate --dataset order_items
 python -m Dataquality.cli validate --dataset payments
 python -m Dataquality.cli validate --dataset products
 python -m Dataquality.cli validate --dataset sellers
-
+```
 
 ## Output
 
 Profile metrics are written to:
 
-text
+```text
 data/processed/profile_metrics/<dataset>_profile_metrics.csv
-
+```
 
 Validation results are written to:
 
-text
+```text
 data/processed/validation_results/<dataset>_validation_results.csv
-
+```
 
 Example:
 
-text
+```text
 data/processed/profile_metrics/orders_profile_metrics.csv
 data/processed/validation_results/orders_validation_results.csv
-
+```
 
 Generated outputs are intentionally excluded from Git.
 
@@ -277,9 +276,9 @@ Current profile metrics include:
 
 Rules are stored in YAML under:
 
-text
+```text
 configs/datasets/
-
+```
 
 The Python validators are generic and do not hardcode dataset-specific checks.
 
@@ -304,10 +303,10 @@ The Python validators are generic and do not hardcode dataset-specific checks.
 
 Run the complete test suite:
 
-powershell
+```powershell
 $env:PYTHONPATH = "src"
 python -m pytest tests -v
-
+```
 
 The tests use small temporary files and DataFrames, so they do not depend on the local Kaggle dataset.
 
