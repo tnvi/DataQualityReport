@@ -1,7 +1,7 @@
 from dataquality.validation.result import build_result
 import pandas as pd
 
-def validate_table_relationships(dataframe:pd.DataFrame, rules:dict, referencial_dataframes: dict[str,pd.DataFrame]) -> list[dict]:
+def validate_table_relationships(dataframe:pd.DataFrame, rules:dict, referential_dataframes: dict[str,pd.DataFrame]) -> list[dict]:
     dataset = rules['dataset']
 
     relationships = rules.get('relationships', [])
@@ -24,14 +24,14 @@ def validate_table_relationships(dataframe:pd.DataFrame, rules:dict, referencial
                                         ))
             continue
             
-        if referenced_dataset not in referencial_dataframes:
+        if referenced_dataset not in referential_dataframes:
             results.append(build_result(dataset=dataset, rule_name=rule_name,
                                         status = "SKIPPED", severity = severity,
-                                        expected = f"{referenced_dataset} should be in {referencial_dataframes}",
-                                        actual = f"{referenced_dataset} is not avialble in {referencial_dataframes}"))
+                                        expected = f"{referenced_dataset} should be in {referential_dataframes}",
+                                        actual = f"{referenced_dataset} is not avialble in {referential_dataframes}"))
             continue
 
-        referenced_dataframe = referencial_dataframes[referenced_dataset]
+        referenced_dataframe = referential_dataframes[referenced_dataset]
 
         if referenced_column not in referenced_dataframe.columns:
             results.append(build_result(dataset=dataset, rule_name=rule_name,

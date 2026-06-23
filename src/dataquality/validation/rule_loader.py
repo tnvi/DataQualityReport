@@ -6,6 +6,9 @@ import yaml
 DEFAULT_RULES_DIR = Path("configs/datasets")
 
 def load_rules(dataset_name: str, rules_dir: str | Path = DEFAULT_RULES_DIR) -> dict[str, Any]:
+    """
+    read yml file and return in the form of dictionary and handle possible error situation     
+    """
     rules_path = Path(rules_dir)/ f"{dataset_name}.yml"
 
     if not rules_path.exists():
